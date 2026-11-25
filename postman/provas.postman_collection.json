@@ -1,0 +1,300 @@
+{
+  "info": {
+    "_postman_id": "56b774b0-dfdf-476c-981e-f0ad665c60ea",
+    "name": "Provas",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "60377462",
+    "_collection_link": "https://go.postman.co/collection/60377462-56b774b0-dfdf-476c-981e-f0ad665c60ea?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Criar Provas",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"titulo\": \"Prova de Matemática\",\r\n  \"descricao\": \"Conteúdo básico\",\r\n  \"questoes\": [\r\n    {\r\n      \"enunciado\": \"Quanto é 2 + 2?\",\r\n      \"alternativas\": [\r\n        { \"texto\": \"3\", \"correta\": false },\r\n        { \"texto\": \"4\", \"correta\": true },\r\n        { \"texto\": \"5\", \"correta\": false }\r\n      ]\r\n    },\r\n    {\r\n      \"enunciado\": \"Quanto é 3 x 3?\",\r\n      \"alternativas\": [\r\n        { \"texto\": \"6\", \"correta\": false },\r\n        { \"texto\": \"9\", \"correta\": true }\r\n      ]\r\n    }\r\n  ]\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/provas",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "provas"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "sem titulo",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"titulo\": \"\",\r\n  \"descricao\": \"Conteúdo básico\",\r\n  \"questoes\": [\r\n    {\r\n      \"enunciado\": \"Quanto é 2 + 2?\",\r\n      \"alternativas\": [\r\n        { \"texto\": \"3\", \"correta\": false },\r\n        { \"texto\": \"4\", \"correta\": true },\r\n        { \"texto\": \"5\", \"correta\": false }\r\n      ]\r\n    },\r\n    {\r\n      \"enunciado\": \"Quanto é 3 x 3?\",\r\n      \"alternativas\": [\r\n        { \"texto\": \"6\", \"correta\": false },\r\n        { \"texto\": \"9\", \"correta\": true }\r\n      ]\r\n    }\r\n  ]\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/provas",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "provas"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "gabarito errado",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"titulo\": \"Prova de Matemática\",\r\n  \"descricao\": \"Conteúdo básico\",\r\n  \"questoes\": [\r\n    {\r\n      \"enunciado\": \"Quanto é 2 + 2?\",\r\n      \"alternativas\": [\r\n        { \"texto\": \"3\", \"correta\": true },\r\n        { \"texto\": \"4\", \"correta\": true },\r\n        { \"texto\": \"5\", \"correta\": false }\r\n      ]\r\n    },\r\n    {\r\n      \"enunciado\": \"Quanto é 3 x 3?\",\r\n      \"alternativas\": [\r\n        { \"texto\": \"6\", \"correta\": false },\r\n        { \"texto\": \"9\", \"correta\": true }\r\n      ]\r\n    }\r\n  ]\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/provas",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "provas"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "listar provas",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/provas",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "provas"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "ver prova",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/provas/1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "provas",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "não existe",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/provas/999",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "provas",
+            "999"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Login Professor",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.collectionVariables.set(\"token\", pm.response.json().token);"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{ \"email\": \"professor@provas.com\", \"senha\": \"123456\" }",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/auth/login",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "auth",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Login Aluno",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.collectionVariables.set(\"token\", pm.response.json().token);"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{ \"email\": \"aluno@provas.com\", \"senha\": \"123456\" }",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/auth/login",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "auth",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Responder Prova",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"respostas\": [\r\n    { \"questaoId\": 1, \"alternativaId\": 2 },\r\n    { \"questaoId\": 2, \"alternativaId\": 5 }\r\n  ]\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/provas/1/respostas",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "provas",
+            "1",
+            "respostas"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Minhas Notas",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/tentativas/minhas",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "tentativas",
+            "minhas"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "token",
+      "value": ""
+    }
+  ]
+}
