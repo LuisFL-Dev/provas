@@ -33,7 +33,7 @@ public class TratadorDeErros {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("erro", ex.getMessage()));
     }
 
-    // 400: campo inválido (ex.: título vazio)
+ 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, String>> validacao(MethodArgumentNotValidException ex) {
         String mensagem = "Dados inválidos";

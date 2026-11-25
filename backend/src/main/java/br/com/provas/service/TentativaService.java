@@ -16,6 +16,9 @@ import java.util.Map;
 @Service
 public class TentativaService {
 
+  
+    public static final int LIMITE_TENTATIVAS = 2;
+
     private final TentativaRepository tentativaRepository;
     private final ProvaService provaService;
 
@@ -24,12 +27,27 @@ public class TentativaService {
         this.provaService = provaService;
     }
 
-    // Corrige a prova do aluno e salva a tentativa
+    
+    @Transactional(readOnly = true)
+    public TentativasInfo minhasTentativasNaProva(Long provaId, Usuario aluno) {
+        provaService.buscarEntidade(provaId); // dá 404 se a prova não existir
+        long realizadas = tentativaRepository.countByAlunoIdAndProvaId(aluno.getId(), provaId);
+        return new TentativasInfo(realizadas, LIMITE_TENTATIVAS);
+    }
+
+   
     @Transactional
     public ResultadoResponse responder(Long provaId, ResponderRequest request, Usuario aluno) {
         Prova prova = provaService.buscarEntidade(provaId);
 
-        // Monta um "dicionário": id da questão -> id da alternativa escolhida
+        
+        long realizadas = tentativaRepository.countByAlunoIdAndProvaId(aluno.getId(), provaId);
+        if (realizadas >= LIMITE_TENTATIVAS) {
+            throw new RegraNegocioException(
+                    "Você já usou as " + LIMITE_TENTATIVAS + " tentativas desta prova");
+        }
+
+        
         Map<Long, Long> escolhas = new HashMap<>();
         for (RespostaItem item : request.respostas()) {
             escolhas.put(item.questaoId(), item.alternativaId());
@@ -42,13 +60,13 @@ public class TentativaService {
         int acertos = 0;
         for (Questao questao : prova.getQuestoes()) {
 
-            // 1. O aluno respondeu esta questão?
+            
             Long alternativaId = escolhas.get(questao.getId());
             if (alternativaId == null) {
-                throw new RegraNegocioException("Responda todas as questões antes de enviar");
+                continue;
             }
 
-            // 2. Procura a alternativa escolhida dentro desta questão
+           
             Alternativa escolhida = null;
             for (Alternativa alternativa : questao.getAlternativas()) {
                 if (alternativa.getId().equals(alternativaId)) {
@@ -59,7 +77,7 @@ public class TentativaService {
                 throw new RegraNegocioException("Alternativa inválida na questão " + questao.getOrdem());
             }
 
-            // 3. Guarda a resposta e conta o acerto
+            
             Resposta resposta = new Resposta();
             resposta.setQuestao(questao);
             resposta.setAlternativa(escolhida);
@@ -71,7 +89,7 @@ public class TentativaService {
             }
         }
 
-        // Nota de 0 a 10 com 2 casas decimais: acertos x 10 / total
+        
         int total = prova.getQuestoes().size();
         BigDecimal nota = BigDecimal.valueOf(acertos)
                 .multiply(BigDecimal.TEN)
@@ -85,7 +103,7 @@ public class TentativaService {
         return new ResultadoResponse(tentativa.getId(), prova.getTitulo(), acertos, total, nota);
     }
 
-    // Histórico de notas do aluno logado
+   
     @Transactional(readOnly = true)
     public List<TentativaResumoResponse> minhas(Usuario aluno) {
         List<TentativaResumoResponse> resultado = new ArrayList<>();

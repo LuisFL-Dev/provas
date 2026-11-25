@@ -25,6 +25,12 @@ public class TentativaController {
         return tentativaService.responder(id, request, aluno);
     }
 
+    @GetMapping("/provas/{id}/minhas-tentativas")
+    public TentativasInfo minhasTentativas(@PathVariable Long id,
+                                           @AuthenticationPrincipal Usuario aluno) {
+        return tentativaService.minhasTentativasNaProva(id, aluno);
+    }
+
     @GetMapping("/tentativas/minhas")
     public List<TentativaResumoResponse> minhas(@AuthenticationPrincipal Usuario aluno) {
         return tentativaService.minhas(aluno);

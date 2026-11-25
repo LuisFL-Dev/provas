@@ -1,7 +1,6 @@
 package br.com.provas.DTO;
 
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
@@ -15,8 +14,9 @@ public class TentativaDto {
             @NotNull(message = "alternativaId é obrigatório") Long alternativaId) {
     }
 
+    
     public record ResponderRequest(
-            @NotEmpty(message = "Envie as respostas") @Valid List<RespostaItem> respostas) {
+            @NotNull(message = "Envie as respostas") @Valid List<RespostaItem> respostas) {
     }
 
     public record ResultadoResponse(
@@ -26,5 +26,9 @@ public class TentativaDto {
     public record TentativaResumoResponse(
             Long id, Long provaId, String prova, int acertos, int total,
             BigDecimal nota, LocalDateTime realizadaEm) {
+    }
+
+    // Quantas tentativas o aluno já usou e qual é o limite
+    public record TentativasInfo(long realizadas, int limite) {
     }
 }

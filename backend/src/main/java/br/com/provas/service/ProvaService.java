@@ -22,7 +22,7 @@ public class ProvaService {
         this.provaRepository = provaRepository;
     }
 
-    // Lista todas as provas (as mais novas primeiro)
+    
     @Transactional(readOnly = true)
     public List<ProvaResumoResponse> listar() {
         List<ProvaResumoResponse> resultado = new ArrayList<>();
@@ -37,14 +37,14 @@ public class ProvaService {
         return resultado;
     }
 
-    // Busca uma prova com as questões (sem o gabarito)
+   
     @Transactional(readOnly = true)
     public ProvaDetalheResponse buscar(Long id) {
         Prova prova = buscarEntidade(id);
         return paraDetalhe(prova);
     }
 
-    // Cria a prova com todas as questões e alternativas
+   
     @Transactional
     public ProvaDetalheResponse criar(ProvaRequest request) {
         Prova prova = new Prova();
@@ -54,7 +54,7 @@ public class ProvaService {
         int ordem = 1;
         for (QuestaoRequest qr : request.questoes()) {
 
-            // Regra: cada questão precisa ter exatamente 1 alternativa correta
+          
             int corretas = 0;
             for (AlternativaRequest ar : qr.alternativas()) {
                 if (ar.correta()) {
@@ -91,7 +91,7 @@ public class ProvaService {
         provaRepository.delete(prova);
     }
 
-    // Busca a prova no banco ou lança erro 404
+    
     public Prova buscarEntidade(Long id) {
         Optional<Prova> prova = provaRepository.findById(id);
         if (prova.isEmpty()) {
@@ -100,7 +100,7 @@ public class ProvaService {
         return prova.get();
     }
 
-    // Converte a entidade em DTO, deixando de fora o campo "correta"
+
     private ProvaDetalheResponse paraDetalhe(Prova prova) {
         List<QuestaoResponse> questoes = new ArrayList<>();
 

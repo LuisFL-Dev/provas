@@ -1,0 +1,98 @@
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, Arial, sans-serif;
+  background: #f4f6f8;
+  color: #1f2933;
+}
+
+a { color: #2563eb; text-decoration: none; }
+
+.topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 24px;
+  background: #ffffff;
+  border-bottom: 1px solid #e2e8f0;
+}
+.topo nav { display: flex; gap: 16px; align-items: center; }
+.logo { font-weight: 700; color: #1f2933; }
+.usuario { color: #64748b; }
+
+.conteudo { max-width: 760px; margin: 32px auto; padding: 0 16px; }
+
+.cartao {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 16px;
+}
+
+label { display: block; font-weight: 600; margin: 12px 0 4px; }
+
+input[type="text"], input[type="email"], input[type="password"], textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 15px;
+}
+
+button {
+  background: #2563eb;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 16px;
+  font-size: 15px;
+  cursor: pointer;
+}
+button:disabled { opacity: 0.6; cursor: default; }
+button.secundario { background: #e2e8f0; color: #1f2933; }
+button.perigo { background: #dc2626; }
+
+.alternativa { display: flex; gap: 8px; align-items: center; margin: 8px 0; }
+.alternativa input[type="text"] { flex: 1; }
+
+.erro {
+  background: #fee2e2;
+  color: #991b1b;
+  padding: 10px;
+  border-radius: 6px;
+  margin: 12px 0;
+}
+
+.acoes { display: flex; gap: 8px; margin-top: 16px; flex-wrap: wrap; }
+
+.nota { font-size: 48px; font-weight: 700; margin: 8px 0; }
+
+table { width: 100%; border-collapse: collapse; background: #ffffff; }
+th, td { text-align: left; padding: 10px; border-bottom: 1px solid #e2e8f0; }
+
+/* Barra da prova: tentativa | cronômetro | botão */
+.barra-prova {
+  position: sticky;
+  bottom: 0;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 12px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-top: 16px;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
+}
+.barra-prova .info { color: #64748b; }
+.barra-prova button { justify-self: end; }
+
+.cronometro {
+  font-size: 24px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.cronometro.alerta { color: #dc2626; }

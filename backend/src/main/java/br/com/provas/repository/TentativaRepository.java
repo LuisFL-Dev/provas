@@ -8,4 +8,7 @@ import java.util.List;
 public interface TentativaRepository extends JpaRepository<Tentativa, Long> {
 
     List<Tentativa> findByAlunoIdOrderByRealizadaEmDesc(Long alunoId);
+
+   
+    long countByAlunoIdAndProvaId(Long alunoId, Long provaId);
 }
