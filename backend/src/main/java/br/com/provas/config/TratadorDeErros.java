@@ -1,5 +1,6 @@
 package br.com.provas.config;
 
+import br.com.provas.service.CredenciaisInvalidasException;
 import br.com.provas.service.NaoEncontradoException;
 import br.com.provas.service.RegraNegocioException;
 import org.springframework.http.HttpStatus;
@@ -24,6 +25,12 @@ public class TratadorDeErros {
     @ExceptionHandler(RegraNegocioException.class)
     public ResponseEntity<Map<String, String>> regraNegocio(RegraNegocioException ex) {
         return ResponseEntity.badRequest().body(Map.of("erro", ex.getMessage()));
+    }
+
+    // 401: e-mail ou senha errados
+    @ExceptionHandler(CredenciaisInvalidasException.class)
+    public ResponseEntity<Map<String, String>> credenciaisInvalidas(CredenciaisInvalidasException ex) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("erro", ex.getMessage()));
     }
 
     // 400: campo inválido (ex.: título vazio)
